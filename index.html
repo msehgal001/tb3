@@ -98,7 +98,7 @@
         </div>
 
         <!-- Modals -->
-        <div id="login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full relative"><button id="close-login-modal-btn" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button><h2 class="font-poppins text-2xl font-bold text-gray-900 mb-4">Client Log In</h2><form id="login-form" class="space-y-4"><input type="text" id="login-username" placeholder="Username" required class="w-full border-gray-300 rounded-md shadow-sm"><input type="password" id="login-password" placeholder="Password" required class="w-full border-gray-300 rounded-md shadow-sm"><button type="submit" class="w-full btn-primary font-semibold py-3 rounded-lg">Log In</button></form></div></div>
+        <div id="login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full relative"><button id="close-login-modal-btn" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button><h2 class="font-poppins text-2xl font-bold text-gray-900 mb-4">Client Log In</h2><form id="login-form" class="space-y-4"><input type="text" id="login-username" placeholder="Enter any username" required class="w-full border-gray-300 rounded-md shadow-sm"><input type="password" id="login-password" placeholder="Enter any password" required class="w-full border-gray-300 rounded-md shadow-sm"><button type="submit" class="w-full btn-primary font-semibold py-3 rounded-lg">Log In</button></form></div></div>
         <div id="message-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full"><h3 id="message-title" class="font-poppins text-xl font-bold text-gray-900 mb-4"></h3><p id="message-text" class="text-gray-600 mb-6"></p><button id="close-message-btn" class="w-full btn-primary font-semibold py-2 rounded-lg">Close</button></div></div>
         <div id="add-test-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl max-w-3xl w-full relative max-h-[90vh] overflow-y-auto"><button id="close-add-test-modal-btn" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button><h2 class="font-poppins text-2xl font-bold text-gray-900 mb-6">Add Specific Test Details</h2><form id="add-test-form" class="space-y-6"><div><label for="new-test-type-select" class="block text-sm font-medium text-gray-700">Test Type</label><select id="new-test-type-select" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><option value="">Select a test...</option><option value="Vibration">Vibration</option><option value="Thermal VAC">Thermal VAC</option><option value="EMI/EMC">EMI/EMC</option><option value="NDT">NDT</option><option value="Wind Tunnel">Wind Tunnel</option></select></div><div id="specific-test-fields"></div><div class="pt-6 border-t flex justify-end"><button type="submit" class="btn-primary font-semibold py-3 px-6 rounded-lg">Add Test to Campaign</button></div></form></div></div>
         
@@ -114,7 +114,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const mockCampaigns = [];
+            const mockCampaigns = [
+                {
+                    id: 'campaign_0',
+                    companyName: 'Example Corp',
+                    testPurpose: 'Initial Demo Campaign',
+                    testBackground: 'This is a sample campaign to demonstrate the dashboard functionality.',
+                    createdAt: new Date(Date.now() - 86400000 * 10),
+                    status: 'Complete',
+                    tests: [{type: 'Vibration', details: {'Test Axes': 'X, Y, Z'}}]
+                }
+            ];
             const publicPage = document.getElementById('public-page');
             const dashboardPage = document.getElementById('dashboard-page');
             const signupForm = document.getElementById('signup-form');
@@ -164,7 +174,7 @@
                     status: 'New Request',
                     tests: []
                 };
-                mockCampaigns.push(newCampaign);
+                mockCampaigns.unshift(newCampaign);
                 showMessage('Account Created!', 'Your account and first test campaign have been successfully created. You are now being logged in.');
                 setTimeout(() => {
                     document.getElementById('message-modal').classList.add('hidden');
