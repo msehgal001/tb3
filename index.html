@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestBedz - Your Turn-Key Aerospace Testing Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .btn-primary { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: all 0.3s ease; color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); }
+        .btn-primary:disabled { background: #9ca3af; cursor: not-allowed; transform: translateY(0); box-shadow: none; }
+        .form-step { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .form-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page { display: none; }
+        .page.active { display: block; }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .status-newrequest { background-color: #dbeafe; color: #1e40af; }
+        .status-planning { background-color: #ede9fe; color: #5b21b6; }
+        .status-facilitymatching { background-color: #fef3c7; color: #92400e; }
+        .status-testing { background-color: #d9f99d; color: #3f6212; }
+        .status-complete { background-color: #d1fae5; color: #065f46; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div id="app-container">
+        <!-- =================================================================== -->
+        <!-- PUBLIC-FACING WEBSITE (Logged Out State)                            -->
+        <!-- =================================================================== -->
+        <div id="public-page" class="page active">
+            <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-40">
+                <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                    <a href="#" class="flex items-center space-x-2"><svg class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-xl font-bold text-gray-800">TestBedz</span></a>
+                    <div class="hidden md:flex items-center space-x-4"><button id="show-login-btn" class="font-semibold text-gray-600 hover:text-blue-600">Log In</button><a href="#rfq-form" class="btn-primary font-semibold px-5 py-2 rounded-lg">Get Started</a></div>
+                </nav>
+            </header>
+            <main>
+                <section class="container mx-auto px-6 pt-24 pb-16 text-center"><h1 class="font-poppins text-4xl md:text-6xl font-bold text-gray-900 leading-tight">Your End-to-End Testing Partner.</h1><p class="text-xl md:text-2xl mt-4 text-gray-600 max-w-3xl mx-auto">From initial planning to final report, TestBedz is your dedicated concierge for aerospace testing. Submit a request and get a dedicated dashboard to manage your entire test campaign.</p><div class="mt-8"><a href="#rfq-form" class="btn-primary text-white font-bold px-8 py-4 rounded-lg text-lg">Create Your Test Campaign</a></div></section>
+                <section id="rfq-form" class="py-20">
+                    <div class="container mx-auto px-6">
+                        <div class="bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-xl shadow-2xl border border-gray-200">
+                            <h2 class="font-poppins text-3xl font-bold text-center text-gray-900 mb-4">Create Your Test Campaign & Account</h2>
+                            <p class="text-lg text-center text-gray-600 mb-8">This initial information creates your project ticket and secure client account.</p>
+                            <form id="signup-form">
+                                <div class="form-step active">
+                                    <h3 class="font-semibold text-xl mb-6 text-center">Step 1: Company & Contact</h3>
+                                    <div class="space-y-6"><div><label for="CompanyName" class="block text-sm font-medium text-gray-700">Company Name</label><input type="text" name="CompanyName" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div><div><label for="ContactName" class="block text-sm font-medium text-gray-700">Your Full Name</label><input type="text" name="ContactName" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div><div><label for="ContactEmail" class="block text-sm font-medium text-gray-700">Contact Email</label><input type="email" name="ContactEmail" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div><div><label for="ZipCode" class="block text-sm font-medium text-gray-700">Preferred Testing Area (Zip Code)</label><input type="text" name="ZipCode" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div></div>
+                                </div>
+                                <div class="form-step">
+                                    <h3 class="font-semibold text-xl mb-6 text-center">Step 2: Project Overview</h3>
+                                    <div class="space-y-6"><div><label for="TestBackground" class="block text-sm font-medium text-gray-700">Test Background</label><textarea name="TestBackground" rows="3" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Briefly describe your project and what you're trying to achieve."></textarea></div><div><label for="TestPurpose" class="block text-sm font-medium text-gray-700">Purpose of Test</label><textarea name="TestPurpose" rows="3" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="e.g., Qualification for launch, developmental testing, model correlation..."></textarea></div></div>
+                                </div>
+                                <div class="form-step">
+                                    <h3 class="font-semibold text-xl mb-6 text-center">Step 3: Asset & Schedule</h3>
+                                    <div class="space-y-6"><div class="grid grid-cols-2 gap-4"><div><label for="ArticleDimensions" class="block text-sm font-medium text-gray-700">Asset Dimensions (cm)</label><input type="text" name="ArticleDimensions" placeholder="e.g., 30x20x10" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div><div><label for="ArticleWeight" class="block text-sm font-medium text-gray-700">Asset Weight (kg)</label><input type="number" name="ArticleWeight" placeholder="e.g., 5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div></div><div><label for="DesiredStartDate" class="block text-sm font-medium text-gray-700">Desired Start Date</label><input type="date" name="DesiredStartDate" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div></div>
+                                </div>
+                                <div class="form-step">
+                                    <h3 class="font-semibold text-xl mb-6 text-center">Step 4: Create Your Secure Account</h3>
+                                    <div class="space-y-6"><div><label for="Username" class="block text-sm font-medium text-gray-700">Username</label><input type="text" name="Username" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div><div><label for="Password" class="block text-sm font-medium text-gray-700">Password</label><input type="password" name="Password" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"></div></div>
+                                </div>
+                                <div class="mt-10 flex justify-between"><button type="button" id="prev-btn" class="bg-gray-200 text-gray-700 font-semibold px-6 py-2 rounded-lg" style="display: none;">Back</button><button type="button" id="next-btn" class="btn-primary font-semibold px-6 py-2 rounded-lg ml-auto">Next</button><button type="submit" id="submit-btn" class="btn-primary font-semibold px-6 py-2 rounded-lg ml-auto" style="display: none;">Submit & Create Account</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- SECURE DASHBOARD (Logged In State)                                  -->
+        <!-- =================================================================== -->
+        <div id="dashboard-page" class="page">
+            <header class="bg-white shadow-sm">
+                <nav class="container mx-auto px-6 py-4 flex justify-between items-center"><div class="flex items-center space-x-2"><svg class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="text-xl font-bold text-gray-800">TestBedz</span></div><div><button id="logout-btn" class="font-semibold text-gray-600 hover:text-blue-600">Log Out</button></div></nav>
+            </header>
+            <main class="container mx-auto p-6">
+                <div id="dashboard-main-view">
+                    <h1 class="font-poppins text-3xl font-bold text-gray-900">Your Test Campaigns</h1>
+                    <p class="text-lg text-gray-600 mt-2">This is your central dashboard. Click on a campaign to view details and add specific tests.</p>
+                    <div id="campaign-tickets-container" class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+                <div id="campaign-detail-view" class="hidden mt-8 bg-white p-8 rounded-xl shadow-lg">
+                    <button id="back-to-dashboard-btn" class="font-semibold text-blue-600 mb-6">← Back to Dashboard</button>
+                    <div class="flex justify-between items-start"><h2 class="font-poppins text-2xl font-bold" id="detail-campaign-purpose"></h2><span id="detail-campaign-status" class="status-badge"></span></div>
+                    <p class="text-gray-600 mt-2" id="detail-campaign-background"></p>
+                    <hr class="my-6">
+                    <h3 class="font-poppins text-xl font-bold mb-4">Individual Tests in this Campaign</h3>
+                    <div id="tests-container" class="space-y-4"></div>
+                    <div class="mt-6"><button id="show-add-test-modal-btn" class="w-full text-center py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold rounded-lg border-2 border-dashed border-blue-200 transition-colors">+ Add a New Test</button></div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Modals -->
+        <div id="login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full relative"><button id="close-login-modal-btn" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button><h2 class="font-poppins text-2xl font-bold text-gray-900 mb-4">Client Log In</h2><form id="login-form" class="space-y-4"><input type="text" id="login-username" placeholder="Username" required class="w-full border-gray-300 rounded-md shadow-sm"><input type="password" id="login-password" placeholder="Password" required class="w-full border-gray-300 rounded-md shadow-sm"><button type="submit" class="w-full btn-primary font-semibold py-3 rounded-lg">Log In</button></form></div></div>
+        <div id="message-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl text-center max-w-sm w-full"><h3 id="message-title" class="font-poppins text-xl font-bold text-gray-900 mb-4"></h3><p id="message-text" class="text-gray-600 mb-6"></p><button id="close-message-btn" class="w-full btn-primary font-semibold py-2 rounded-lg">Close</button></div></div>
+        <div id="add-test-modal" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center hidden z-50 p-4"><div class="bg-white p-8 rounded-xl shadow-2xl max-w-3xl w-full relative max-h-[90vh] overflow-y-auto"><button id="close-add-test-modal-btn" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button><h2 class="font-poppins text-2xl font-bold text-gray-900 mb-6">Add Specific Test Details</h2><form id="add-test-form" class="space-y-6"><div><label for="new-test-type-select" class="block text-sm font-medium text-gray-700">Test Type</label><select id="new-test-type-select" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><option value="">Select a test...</option><option value="Vibration">Vibration</option><option value="Thermal VAC">Thermal VAC</option><option value="EMI/EMC">EMI/EMC</option><option value="NDT">NDT</option><option value="Wind Tunnel">Wind Tunnel</option></select></div><div id="specific-test-fields"></div><div class="pt-6 border-t flex justify-end"><button type="submit" class="btn-primary font-semibold py-3 px-6 rounded-lg">Add Test to Campaign</button></div></form></div></div>
+        
+        <!-- Dynamic Form Field Templates -->
+        <div id="field-templates" class="hidden">
+            <div id="Vibration-fields" class="space-y-4"><div><label class="block text-sm font-medium">Mounting Plan & Interface Drawing</label><textarea class="mt-1 w-full border-gray-300 rounded-md" rows="2" placeholder="How will the device be mounted? Do you have a custom fixture?"></textarea><input type="file" class="mt-2 text-sm"></div><div><label class="block text-sm font-medium">External Accelerometers</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="How many are needed and what are their precise locations?"></div><div><label class="block text-sm font-medium">Test Axes</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., X, Y, and Z"></div></div>
+            <div id="ThermalVAC-fields" class="space-y-4"><div><label class="block text-sm font-medium">Test Type</label><select class="mt-1 w-full border-gray-300 rounded-md"><option>Operational</option><option>Survival</option></select></div><div><label class="block text-sm font-medium">Number of Cycles</label><input type="number" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 1 for survival, 8 for operational"></div><div><label class="block text-sm font-medium">Temperature Range (°C)</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., -80 to +120"></div><div><label class="block text-sm font-medium">Max Rate of Change (°C/min)</label><input type="number" step="0.1" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 5.0"></div><div><label class="block text-sm font-medium">Dwell Time (hours)</label><input type="number" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 2"></div><div><label class="block text-sm font-medium">Interface Requirements (Power & Data)</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 28V DC @ 2A, RS-422 for telemetry"></div></div>
+            <div id="EMIEMC-fields" class="space-y-4"><div><label class="block text-sm font-medium">Modes of Operation During Test</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., Standby, Full Power Transmit"></div><div><label class="block text-sm font-medium">Power Requirements</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 28V DC, 5A peak"></div><div><label class="block text-sm font-medium">Testing Objective</label><select class="mt-1 w-full border-gray-300 rounded-md"><option>Radiated Emissions</option><option>Conducted Emissions</option><option>Radiated Immunity</option><option>Conducted Immunity</option><option>ESD Immunity</option></select></div><div><label class="block text-sm font-medium">Success/Failure Criteria</label><textarea class="mt-1 w-full border-gray-300 rounded-md" rows="2" placeholder="e.g., No uncommanded resets, data corruption below 1%..."></textarea></div></div>
+            <div id="NDT-fields" class="space-y-4"><div><label class="block text-sm font-medium">Primary Objective</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., Detect internal voids, check weld integrity"></div><div><label class="block text-sm font-medium">Material(s)</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., Carbon Fiber Composite, Aluminum 6061"></div><div><label class="block text-sm font-medium">Defects to Detect</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., Cracks, delamination, porosity"></div></div>
+            <div id="WindTunnel-fields" class="space-y-4"><div><label class="block text-sm font-medium">Desired Wind Speed Sweep (mph)</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., 0 to 150"></div><div><label class="block text-sm font-medium">Desired Angle of Attack Sweep (°)</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., -5 to 20"></div><div><label class="block text-sm font-medium">Behavior to Observe</label><input type="text" class="mt-1 w-full border-gray-300 rounded-md" placeholder="e.g., Lift/Drag coefficients, flutter analysis"></div><div><label class="block text-sm font-medium">Rig/Fixture Plan</label><textarea class="mt-1 w-full border-gray-300 rounded-md" rows="2" placeholder="Do you have a rig, or do you require design support?"></textarea></div></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mockCampaigns = [];
+            const publicPage = document.getElementById('public-page');
+            const dashboardPage = document.getElementById('dashboard-page');
+            const signupForm = document.getElementById('signup-form');
+            const loginForm = document.getElementById('login-form');
+            const logoutBtn = document.getElementById('logout-btn');
+            const showLoginBtn = document.getElementById('show-login-btn');
+            const loginModal = document.getElementById('login-modal');
+            const closeModalBtn = document.getElementById('close-login-modal-btn');
+            const addTestModal = document.getElementById('add-test-modal');
+            const closeAddTestModalBtn = document.getElementById('close-add-test-modal-btn');
+            const showAddTestModalBtn = document.getElementById('show-add-test-modal-btn');
+            const addTestForm = document.getElementById('add-test-form');
+            const newTestTypeSelect = document.getElementById('new-test-type-select');
+            const specificTestFieldsContainer = document.getElementById('specific-test-fields');
+            
+            let currentCampaignId = null;
+            let isLoggedIn = false;
+
+            function showPage(pageId) {
+                publicPage.classList.toggle('active', pageId === 'public');
+                dashboardPage.classList.toggle('active', pageId === 'dashboard');
+            }
+
+            function handleLogin() {
+                isLoggedIn = true;
+                showPage('dashboard');
+                loadCampaigns();
+                loginModal.classList.add('hidden');
+            }
+
+            function handleLogout() {
+                isLoggedIn = false;
+                currentCampaignId = null;
+                showPage('public');
+            }
+
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(signupForm);
+                const newCampaign = {
+                    id: `campaign_${Date.now()}`,
+                    companyName: formData.get('CompanyName'),
+                    contactName: formData.get('ContactName'),
+                    testPurpose: formData.get('TestPurpose'),
+                    testBackground: formData.get('TestBackground'),
+                    createdAt: new Date(),
+                    status: 'New Request',
+                    tests: []
+                };
+                mockCampaigns.push(newCampaign);
+                showMessage('Account Created!', 'Your account and first test campaign have been successfully created. You are now being logged in.');
+                setTimeout(() => {
+                    document.getElementById('message-modal').classList.add('hidden');
+                    handleLogin();
+                }, 2000);
+            });
+
+            loginForm.addEventListener('submit', (e) => { e.preventDefault(); handleLogin(); });
+            logoutBtn.addEventListener('click', handleLogout);
+            showLoginBtn.addEventListener('click', () => loginModal.classList.remove('hidden'));
+            closeModalBtn.addEventListener('click', () => loginModal.classList.add('hidden'));
+
+            function loadCampaigns() {
+                const container = document.getElementById('campaign-tickets-container');
+                container.innerHTML = '';
+                if (mockCampaigns.length === 0) {
+                    container.innerHTML = `<p class="col-span-full text-center text-gray-500">You haven't created any test campaigns yet. Get started on the main page!</p>`;
+                    return;
+                }
+                mockCampaigns.forEach(campaign => {
+                    const ticket = document.createElement('div');
+                    ticket.className = 'bg-white p-6 rounded-xl shadow-md border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow';
+                    ticket.dataset.id = campaign.id;
+                    ticket.innerHTML = `<div class="flex justify-between items-start"><h3 class="font-poppins text-xl font-bold text-gray-800">${campaign.testPurpose}</h3><span class="status-badge status-${campaign.status.toLowerCase().replace(/ /g, '')}">${campaign.status}</span></div><p class="text-gray-600 mt-2">For: ${campaign.companyName}</p><p class="text-sm text-gray-400 mt-4">Created: ${campaign.createdAt.toLocaleDateString()}</p>`;
+                    ticket.addEventListener('click', () => showCampaignDetail(campaign.id));
+                    container.appendChild(ticket);
+                });
+            }
+
+            function showCampaignDetail(campaignId) {
+                currentCampaignId = campaignId;
+                const campaign = mockCampaigns.find(c => c.id === campaignId);
+                if (!campaign) return;
+                document.getElementById('dashboard-main-view').classList.add('hidden');
+                document.getElementById('campaign-detail-view').classList.remove('hidden');
+                document.getElementById('detail-campaign-purpose').textContent = campaign.testPurpose;
+                document.getElementById('detail-campaign-background').textContent = campaign.testBackground;
+                const statusBadge = document.getElementById('detail-campaign-status');
+                statusBadge.textContent = campaign.status;
+                statusBadge.className = `status-badge status-${campaign.status.toLowerCase().replace(/ /g, '')}`;
+                renderTests(campaign.tests);
+            }
+
+            function renderTests(tests) {
+                const container = document.getElementById('tests-container');
+                container.innerHTML = '';
+                if (!tests || tests.length === 0) {
+                    container.innerHTML = `<p class="text-gray-500">No specific tests have been added to this campaign yet.</p>`;
+                    return;
+                }
+                tests.forEach(test => {
+                    const testEl = document.createElement('div');
+                    testEl.className = 'p-4 border rounded-lg bg-gray-50';
+                    let detailsHtml = Object.entries(test.details).map(([key, value]) => `<p class="text-sm text-gray-600"><strong class="text-gray-800">${key}:</strong> ${value}</p>`).join('');
+                    testEl.innerHTML = `<h4 class="font-semibold text-lg">${test.type}</h4><div class="mt-2 space-y-1">${detailsHtml}</div>`;
+                    container.appendChild(testEl);
+                });
+            }
+            
+            showAddTestModalBtn.addEventListener('click', () => {
+                addTestForm.reset();
+                specificTestFieldsContainer.innerHTML = '';
+                addTestModal.classList.remove('hidden');
+            });
+            closeAddTestModalBtn.addEventListener('click', () => addTestModal.classList.add('hidden'));
+            
+            newTestTypeSelect.addEventListener('change', (e) => {
+                const testType = e.target.value.replace(/\s|\//g, ''); // Remove spaces and slashes for ID matching
+                const templateId = `${testType}-fields`;
+                const template = document.getElementById(templateId);
+                let formHTML = '';
+                if (template) {
+                    formHTML += template.innerHTML;
+                }
+                // Add Safety & Materials section to all test types
+                formHTML += `<div class="pt-4 mt-4 border-t"><label class="block text-sm font-medium text-red-700">Safety & Materials</label><textarea class="mt-1 w-full border-gray-300 rounded-md" rows="2" placeholder="List all materials used. Note any potential for outgassing (e.g., foams, adhesives)." required></textarea></div>`;
+                specificTestFieldsContainer.innerHTML = formHTML;
+            });
+
+            addTestForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!currentCampaignId) return;
+                const campaign = mockCampaigns.find(c => c.id === currentCampaignId);
+                if (!campaign) return;
+                
+                const testType = newTestTypeSelect.value;
+                if (!testType) {
+                    showMessage('Error', 'Please select a test type.');
+                    return;
+                }
+
+                const details = {};
+                const inputs = specificTestFieldsContainer.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    const label = input.previousElementSibling;
+                    if (label) {
+                        details[label.textContent] = input.value;
+                    }
+                });
+
+                campaign.tests.push({ type: testType, details: details });
+                campaign.status = "Facility Matching";
+                renderTests(campaign.tests);
+                addTestModal.classList.add('hidden');
+                showMessage('Test Added', `A new ${testType} test has been added to your campaign. We are now matching you with qualified facilities.`);
+                const statusBadge = document.getElementById('detail-campaign-status');
+                statusBadge.textContent = campaign.status;
+                statusBadge.className = `status-badge status-${campaign.status.toLowerCase().replace(/ /g, '')}`;
+            });
+
+            document.getElementById('back-to-dashboard-btn').addEventListener('click', () => {
+                currentCampaignId = null;
+                document.getElementById('dashboard-main-view').classList.remove('hidden');
+                document.getElementById('campaign-detail-view').classList.add('hidden');
+                loadCampaigns();
+            });
+
+            const signupFormSteps = document.querySelectorAll('#signup-form .form-step');
+            let currentSignupStep = 1;
+            document.getElementById('next-btn').addEventListener('click', () => {
+                const currentFormStep = signupFormSteps[currentSignupStep - 1];
+                const inputs = currentFormStep.querySelectorAll('input[required], textarea[required]');
+                let isValid = true;
+                for (const input of inputs) { if (!input.value.trim()) { isValid = false; break; } }
+                if (isValid && currentSignupStep < signupFormSteps.length) {
+                    signupFormSteps[currentSignupStep - 1].classList.remove('active');
+                    currentSignupStep++;
+                    signupFormSteps[currentSignupStep - 1].classList.add('active');
+                    document.getElementById('prev-btn').style.display = 'block';
+                    if (currentSignupStep === signupFormSteps.length) {
+                        document.getElementById('next-btn').style.display = 'none';
+                        document.getElementById('submit-btn').style.display = 'block';
+                    }
+                } else if (!isValid) { showMessage('Incomplete Information', 'Please fill out all required fields before proceeding.'); }
+            });
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentSignupStep > 1) {
+                    signupFormSteps[currentSignupStep - 1].classList.remove('active');
+                    currentSignupStep--;
+                    signupFormSteps[currentSignupStep - 1].classList.add('active');
+                    document.getElementById('submit-btn').style.display = 'none';
+                    document.getElementById('next-btn').style.display = 'block';
+                    if (currentSignupStep === 1) { document.getElementById('prev-btn').style.display = 'none'; }
+                }
+            });
+
+            function showMessage(title, text) {
+                document.getElementById('message-title').textContent = title;
+                document.getElementById('message-text').textContent = text;
+                document.getElementById('message-modal').classList.remove('hidden');
+            }
+            document.getElementById('close-message-btn').addEventListener('click', () => {
+                document.getElementById('message-modal').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
