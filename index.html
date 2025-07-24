@@ -347,7 +347,20 @@
       function renderAdminStatusControls(campaignId, currentStatus) { const container = document.getElementById('admin-status-controls'); container.innerHTML = ''; const statuses = ['Awaiting Facility Response', 'Facility Matching', 'Contract Pending', 'Planning', 'Testing', 'Complete']; statuses.forEach(status => { const btn = document.createElement('button'); btn.textContent = status; btn.className = 'btn-primary px-3 py-1 rounded-md text-sm disabled:bg-gray-400'; if (status === currentStatus) { btn.disabled = true; } btn.addEventListener('click', () => updateCampaignStatus(campaignId, status)); container.appendChild(btn); }); }
       async function updateCampaignStatus(campaignId, newStatus) { const campaignRef = doc(db, "campaigns", campaignId); await updateDoc(campaignRef, { status: newStatus }); showMessage('Status Updated', `Campaign status changed to ${newStatus}.`); }
       
-      onAuthStateChanged(auth, (user) => { if (user) { if (user.email === 'admin@testbedz.com') { showPage('admin'); listenForAllCampaigns(); } else { showPage('dashboard'); listenForUserCampaigns(user.uid); } } else { if (unsubscribeCampaigns) unsubscribeCampaigns(); showPage('public'); } });
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          if (user.email === 'admin@testbedz.com') {
+            showPage('admin');
+            listenForAllCampaigns(); // Correctly listen for campaigns on admin login
+          } else {
+            showPage('dashboard');
+            listenForUserCampaigns(user.uid); // Correctly listen for campaigns on user login
+          }
+        } else {
+          if (unsubscribeCampaigns) unsubscribeCampaigns();
+          showPage('public');
+        }
+      });
       
       function renderFacilityCards() { if (!facilitiesGrid) return; facilitiesGrid.innerHTML = ''; sprFacilities.forEach(facility => { const card = document.createElement('div'); card.className = 'bg-white rounded-lg shadow-lg overflow-hidden flex flex-col'; card.innerHTML = `<img src="${facility.image}" alt="${facility.name}" class="w-full h-48 object-cover"><div class="p-6 flex-grow flex flex-col"><h3 class="font-poppins font-bold text-xl mb-2 text-gray-900">${facility.name}</h3><p class="text-gray-600 mb-4 flex-grow">${facility.shortDesc}</p><button data-facility-id="${facility.id}" class="facility-info-btn mt-auto font-semibold text-blue-600 hover:text-blue-700 self-start">More Info →</button></div>`; facilitiesGrid.appendChild(card); }); }
       function openFacilityModal(facilityId) { const facility = sprFacilities.find(f => f.id === facilityId); if (!facility) return; document.getElementById('modal-facility-img').src = facility.image; document.getElementById('modal-facility-name').textContent = facility.name; document.getElementById('modal-facility-desc').textContent = facility.longDesc; const specsList = document.getElementById('modal-facility-specs'); specsList.innerHTML = ''; for (const [key, value] of Object.entries(facility.specs)) { const li = document.createElement('li'); li.innerHTML = `<strong class="font-semibold text-gray-800">${key}:</strong> ${value}`; specsList.appendChild(li); } showModal(facilityInfoModal); }
