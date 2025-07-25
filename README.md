@@ -14,7 +14,7 @@ Detailed Form Logic: The "Add a New Test" form uses conditional logic to show re
 Public Information Pages: Includes browseable pages for Facilities, FAQs, and Resources.
 
 For Facility Administrators
-Secure Admin Login: A dedicated admin role (e-mail: admin@testbedz.com) provides access to a separate, comprehensive dashboard.
+Secure Admin Login: A dedicated admin role  provides access to a separate, comprehensive dashboard.
 Centralized Campaign Dashboard: Admins can view a real-time list of all test campaigns submitted by all users, sorted by date.
 Campaign Management: Admins can click into any campaign to view the full details submitted by the user.
 Status Control: Admins have the ability to update the status of any campaign (e.g., from "Awaiting Response" to "Planning"), which instantly updates the view for the client.
