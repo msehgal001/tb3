@@ -38,7 +38,7 @@ Click on a campaign to view its details or to add more specific tests to it.
 
 Admin Workflow
 Click the "Log In" button.
-Enter the email admin@testbedz.com and the password you created for it.
+Enter the email and the password you created for it.
 Check the "Log in as Admin" checkbox.
 You will be directed to the admin dashboard, showing a list of all campaigns from all users.
 Click on any campaign to view its details and use the buttons at the bottom to update its status. The user will see this status change in real-time.
